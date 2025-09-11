@@ -1,0 +1,1 @@
+{"features": ["si", "ni", "rpi"], "model_type": "regression+classification", "label_mapping": ["Good", "Moderate", "Poor", "Unhealthy", "Very Unhealthy", "Hazardous"]}
