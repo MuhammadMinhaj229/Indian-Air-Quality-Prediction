@@ -166,6 +166,19 @@ Response:
 
 ---
 
+## 📸 Project Screenshots  
+
+### 🔹 Dashboard View  
+<img src="./screenshots/Screenshot%202025-09-11%20184652.png" alt="Dashboard" width="600"/>  
+
+### 🔹 Prediction Form  
+<img src="./screenshots/Screenshot%202025-09-11%20184733.png" alt="Prediction Form" width="600"/>  
+
+### 🔹 Mobile View (Samsung Galaxy A51/71)  
+<img src="./screenshots/127.0.0.1_3000_aqi-alerts_frontend_index.html(Samsung%20Galaxy%20A51_71).png" alt="Mobile View" width="300"/>  
+
+
+
 ## 🎯 Future Work
 
 * Improve accuracy using **deep learning models**.
