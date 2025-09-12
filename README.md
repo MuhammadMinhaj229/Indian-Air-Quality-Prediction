@@ -134,7 +134,7 @@ npm install
 npm run dev
 ```
 
-UI available at: 👉 [http://localhost:5173](http://localhost:5173)
+UI available at: 👉 [(http://127.0.0.1:3000/frontend/index.html)]
 
 ---
 
