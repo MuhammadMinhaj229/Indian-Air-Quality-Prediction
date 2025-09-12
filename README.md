@@ -182,7 +182,3 @@ Response:
 * 🎓 B.Tech CSE (Data Science)
 * 🌱 Passionate about ML, AI, and impactful projects
 * 🔗 [GitHub](https://github.com/MuhammadMinhaj229)
-
----
-
-Would you like me to also **add some shields/badges (Python, FastAPI, React, Render, etc.)** at the top of the README to make it look even more impressive?
