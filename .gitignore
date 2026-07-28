@@ -1,0 +1,10 @@
+backend/.venv/
+__pycache__/
+*.pyc
+*.joblib
+!backend/model/model_rf.joblib
+!backend/model/model_clf_rf.joblib
+.DS_Store
+node_modules/
+dist/
+.env
