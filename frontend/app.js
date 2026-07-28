@@ -69,4 +69,20 @@ document.getElementById('manual-form').addEventListener('submit', async (e) => {
   }
 });
 
+// Backend URL connection configuration
+const backendInput = document.getElementById('backend-url');
+backendInput.value = localStorage.getItem('aqi_backend') || 'http://127.0.0.1:8080';
+
+document.getElementById('save-backend').addEventListener('click', () => {
+  let val = backendInput.value.trim();
+  if (val) {
+    if (!val.startsWith('http://') && !val.startsWith('https://')) {
+      val = 'https://' + val;
+    }
+    localStorage.setItem('aqi_backend', val);
+    alert('Backend configuration updated: ' + val);
+    window.location.reload();
+  }
+});
+
 
