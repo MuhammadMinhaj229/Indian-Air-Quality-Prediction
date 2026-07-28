@@ -1,4 +1,5 @@
-const BACKEND_BASE = localStorage.getItem('aqi_backend') || 'http://127.0.0.1:8080';
+// If deployed, this might be replaced during build, but as a vanilla JS app, we default to the Render backend URL
+const BACKEND_BASE = localStorage.getItem('aqi_backend') || 'https://aqi-backend.onrender.com';
 
 function categoryClass(cat) {
   const c = (cat || '').toLowerCase();
@@ -71,7 +72,7 @@ document.getElementById('manual-form').addEventListener('submit', async (e) => {
 
 // Backend URL connection configuration
 const backendInput = document.getElementById('backend-url');
-backendInput.value = localStorage.getItem('aqi_backend') || 'http://127.0.0.1:8080';
+backendInput.value = localStorage.getItem('aqi_backend') || 'https://aqi-backend.onrender.com';
 
 document.getElementById('save-backend').addEventListener('click', () => {
   let val = backendInput.value.trim();
@@ -84,5 +85,3 @@ document.getElementById('save-backend').addEventListener('click', () => {
     window.location.reload();
   }
 });
-
-
