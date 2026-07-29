@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: aqi-prediction-api
+    env: docker
+    dockerContext: backend
+    dockerFilePath: Dockerfile
+    plan: free
