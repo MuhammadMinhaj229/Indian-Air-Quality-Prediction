@@ -1,4 +1,4 @@
-const BACKEND_BASE = localStorage.getItem('aqi_backend') || 'http://127.0.0.1:8080';
+const BACKEND_BASE = localStorage.getItem('aqi_backend') || 'https://aqi-backend-v5ay.onrender.com';
 
 function categoryClass(cat) {
   const c = (cat || '').toLowerCase();
