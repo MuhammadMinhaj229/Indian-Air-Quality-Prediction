@@ -4,6 +4,19 @@
 
 ---
 
+## Architecture Flow
+
+```mermaid
+flowchart LR
+    Data["OpenAQ & City Records"] --> Clean["Pollutant Imputation (PM2.5, PM10, SO2)"]
+    Clean --> Models["Random Forest Regressor & Classifier"]
+    Models --> FastAPI["FastAPI Backend Inference Server"]
+    FastAPI --> Frontend["React + Tailwind Dashboard"]
+    Frontend --> Advisory["City AQI Index & Health Advisory"]
+```
+
+---
+
 ## Project Overview
 
 Air pollution is one of the biggest environmental concerns in India. This project aims to:
