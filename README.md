@@ -15,7 +15,7 @@ Air pollution is one of the biggest environmental concerns in India. This projec
 
 ---
 
-## ️ Tech Stack
+## Tech Stack
 
 ### **Backend (FastAPI)**
 
@@ -52,26 +52,26 @@ Air pollution is one of the biggest environmental concerns in India. This projec
 
 ```
 Indian-Air-Quality-Prediction/
-│── backend/
-│   ├── main.py                # FastAPI app
-│   ├── quick_test.py          # Local test script
-│   ├── feature_engineering.py # Data transformation
-│   ├── requirements.txt       # Backend dependencies
-│   ├── model/
-│   │   ├── model_rf.joblib    # Regression model
-│   │   ├── model_clf_rf.joblib# Classification model
-│   │   └── metadata.json      # Model metadata
-│── frontend/
-│   ├── src/                   # React + Tailwind code
-│   ├── package.json
-│   ├── vite.config.ts
-│── data.csv (raw dataset - ignored in repo)
-│── README.md
+ backend/
+    main.py                # FastAPI app
+    quick_test.py          # Local test script
+    feature_engineering.py # Data transformation
+    requirements.txt       # Backend dependencies
+    model/
+       model_rf.joblib    # Regression model
+       model_clf_rf.joblib# Classification model
+       metadata.json      # Model metadata
+ frontend/
+    src/                   # React + Tailwind code
+    package.json
+    vite.config.ts
+ data.csv (raw dataset - ignored in repo)
+ README.md
 ```
 
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 1. **Data Preprocessing**
 
@@ -97,11 +97,11 @@ Indian-Air-Quality-Prediction/
 
 ## Features
 
-✅ Predict AQI using ML models
-✅ Dual outputs: **Regression AQI value** & **Classification label**
-✅ Health advisory messages for users
-✅ Live OpenAQ API integration (city-based predictions)
-✅ Ready for **Docker & Render deployment**
+ Predict AQI using ML models
+ Dual outputs: **Regression AQI value** & **Classification label**
+ Health advisory messages for users
+ Live OpenAQ API integration (city-based predictions)
+ Ready for **Docker & Render deployment**
 
 ---
 
@@ -188,7 +188,7 @@ Response:
 
 ---
 
-## ‍ Author
+## Author
 
 **Muhammad Minhaj**
 
