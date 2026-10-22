@@ -3,71 +3,90 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AQI Alerts</title>
+  <title>Indian Air Quality Telemetry & HVAC Control</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>AQI Alerts & Health Advisory</h1>
-    <p>Predict air quality from OpenAQ or manual inputs and see health risks.</p>
-    <div class="backend-config" style="margin-top: 15px; font-size: 0.9rem;">
-      <label for="backend-url" style="color: #aaa;">FastAPI Backend URL:</label>
-      <input id="backend-url" style="background: #222; color: white; border: 1px solid #444; border-radius: 4px; padding: 5px 8px; width: 280px;" placeholder="https://aqi-backend-v5ay.onrender.com" />
-      <button id="save-backend" style="background: #00B4D8; border: none; color: white; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: 5px;">Connect</button>
+    <div class="header-container">
+      <div class="logo-group">
+        <span class="system-tag">CPCB Standard Telemetry</span>
+        <h1>Air Quality Telemetry & HVAC Damper Intelligence</h1>
+        <p>Real-time National Air Quality Index (NAQI) prediction, public health directives, and automated smart-building intake control.</p>
+      </div>
+      <div class="backend-config">
+        <label for="backend-url">FastAPI Service Endpoint:</label>
+        <div class="input-inline">
+          <input id="backend-url" placeholder="https://aqi-backend-v5ay.onrender.com" />
+          <button id="save-backend">Connect</button>
+        </div>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="card">
-      <h2>Predict by Location (OpenAQ)</h2>
-      <form id="openaq-form">
-        <div class="row">
-          <label for="city">City</label>
-          <input id="city" placeholder="e.g., Delhi" required />
+    <!-- Metro Station Quick Selector -->
+    <section class="card station-selector-card">
+      <h2>Metropolitan Monitoring Stations</h2>
+      <p class="section-desc">Select an active continuous ambient air monitoring station (CAAQMS) or query by custom city.</p>
+      <div class="metro-chips">
+        <button class="chip active" data-city="Delhi">Delhi NCR (Anand Vihar)</button>
+        <button class="chip" data-city="Mumbai">Mumbai (BKC)</button>
+        <button class="chip" data-city="Bengaluru">Bengaluru (Silk Board)</button>
+        <button class="chip" data-city="Hyderabad">Hyderabad (Hitec City)</button>
+        <button class="chip" data-city="Kolkata">Kolkata (Victoria)</button>
+        <button class="chip" data-city="Ahmedabad">Ahmedabad (Maninagar)</button>
+      </div>
+
+      <form id="openaq-form" class="station-query-form">
+        <div class="grid grid-3">
+          <div class="row">
+            <label for="city">City Name</label>
+            <input id="city" value="Delhi" required />
+          </div>
+          <div class="row">
+            <label for="country">Country Code</label>
+            <input id="country" value="IN" maxlength="2" />
+          </div>
+          <div class="row">
+            <label for="lookback">Telemetry Window (Hours)</label>
+            <input id="lookback" type="number" min="1" max="48" value="6" />
+          </div>
         </div>
-        <div class="row">
-          <label for="country">Country Code</label>
-          <input id="country" placeholder="e.g., IN" value="IN" maxlength="2" />
-        </div>
-        <div class="row">
-          <label for="lookback">Lookback Hours</label>
-          <input id="lookback" type="number" min="1" max="48" value="6" />
-        </div>
-        <button type="submit">Fetch & Predict</button>
+        <button type="submit" class="btn-primary">Query Station & Predict</button>
       </form>
       <div id="openaq-result" class="result"></div>
     </section>
 
+    <!-- Manual Sensor Parameter Simulator -->
     <section class="card">
-      <h2>Predict from Manual Features</h2>
+      <h2>Manual Sensor Parameter Simulation</h2>
+      <p class="section-desc">Simulate ambient gas and particulate sub-indices (CPCB conversion formulas).</p>
       <form id="manual-form">
-        <div class="grid">
+        <div class="grid grid-3">
           <div class="row">
-            <label for="si">si (≈ PM2.5)</label>
-            <input id="si" type="number" step="0.01" value="0" />
+            <label for="si">Sulfur Dioxide Sub-Index (si ≈ SO2 / PM2.5)</label>
+            <input id="si" type="number" step="0.1" value="45.0" />
           </div>
           <div class="row">
-            <label for="ni">ni (≈ NO2)</label>
-            <input id="ni" type="number" step="0.01" value="0" />
+            <label for="ni">Nitrogen Dioxide Sub-Index (ni ≈ NO2)</label>
+            <input id="ni" type="number" step="0.1" value="32.0" />
           </div>
           <div class="row">
-            <label for="rpi">rpi (≈ PM10)</label>
-            <input id="rpi" type="number" step="0.01" value="0" />
+            <label for="rpi">Respirable Suspended Particulate Index (rpi ≈ PM10)</label>
+            <input id="rpi" type="number" step="0.1" value="95.0" />
           </div>
         </div>
-        <button type="submit">Predict</button>
+        <button type="submit" class="btn-primary">Run Manual Inference</button>
       </form>
       <div id="manual-result" class="result"></div>
     </section>
   </main>
 
   <footer>
-    <p>Connected to live backend at https://aqi-backend-v5ay.onrender.com</p>
+    <p>National Air Quality Standard (NAQI) Calibrated Models | Continuous Environmental Telemetry Engine</p>
   </footer>
 
   <script src="app.js"></script>
-  
 </body>
 </html>
-
-

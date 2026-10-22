@@ -1,214 +1,115 @@
-# Indian Air Quality Prediction
+# Indian Air Quality Telemetry & Smart-Building HVAC Control
 
-[![Live Deployment](https://img.shields.io/badge/Live_Deployment-Vercel-success?style=flat-square&logo=vercel)](https://indian-air-quality-prediction.vercel.app)
+[![Live App](https://img.shields.io/badge/Live%20Console-Vercel-black)](https://indian-air-quality-prediction.vercel.app)
+![Backend](https://img.shields.io/badge/Backend-Render-46E3B7)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Production%20Ready-009688)
+![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)
+![CPCB](https://img.shields.io/badge/Standard-CPCB%20NAQI-darkgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
-**Live Deployment:** [https://indian-air-quality-prediction.vercel.app](https://indian-air-quality-prediction.vercel.app)
-
- A machine learning powered system to **predict Air Quality Index (AQI)** across Indian cities, using real-time data pipelines and historical datasets. This project integrates **data preprocessing, feature engineering, regression/classification models, and a FastAPI backend**, with a simple **frontend UI** for user interaction.
+A municipal environmental telemetry platform that predicts the National Air Quality Index (NAQI) according to Central Pollution Control Board (CPCB) standards, generates real-time public health advisories, and outputs automated damper throttling signals for industrial and commercial HVAC systems.
 
 ---
 
 ## Architecture Flow
 
 ```mermaid
-flowchart LR
-    Data["OpenAQ & City Records"] --> Clean["Pollutant Imputation (PM2.5, PM10, SO2)"]
-    Clean --> Models["Random Forest Regressor & Classifier"]
-    Models --> FastAPI["FastAPI Backend Inference Server"]
-    FastAPI --> Frontend["React + Tailwind Dashboard"]
-    Frontend --> Advisory["City AQI Index & Health Advisory"]
+flowchart TD
+    SensorStream["Environmental Ingestion: OpenAQ v2 Stream & Municipal CAAQMS Stations"] --> Preprocessor["Sub-Index Mapping: SO2 (si), NO2 (ni), PM10 (rpi)"]
+    
+    Preprocessor --> MLModels["Dual Random Forest Ensemble (backend/model/)"]
+    MLModels --> Regressor["RandomForestRegressor: Continuous AQI Score"]
+    MLModels --> Classifier["RandomForestClassifier: 6-Tier CPCB Category"]
+    
+    Regressor --> Advisory["CPCB Public Health Directive Engine"]
+    Regressor --> HVAC["Smart Building HVAC Automation: Damper Intake % & Filtration Mode"]
+    
+    Advisory --> Frontend["Responsive Web Console (frontend/)"]
+    HVAC --> Frontend
+    Regressor --> API["FastAPI Endpoints (backend/main.py)"]
 ```
 
 ---
 
-## Project Overview
+## Municipal & Industrial Use Case
 
-Air pollution is one of the biggest environmental concerns in India. This project aims to:
+Severe air pollution across Indian metropolitan hubs (Delhi NCR, Mumbai, Bengaluru, Hyderabad, Kolkata) poses acute public health hazards and causes indoor particulate contamination in commercial buildings.
 
-* Predict **AQI levels** using regression and classification ML models.
-* Provide **health advisories** based on predicted AQI categories.
-* Enable **real-time predictions** using raw CSV datasets or OpenAQ API.
-* Expose an **API (FastAPI)** that can be connected to a **frontend (React + Tailwind)** for users.
-
----
-
-## Tech Stack
-
-### **Backend (FastAPI)**
-
-* Python 3.10+
-* FastAPI  (REST API framework)
-* Uvicorn (ASGI server)
-* Joblib (model persistence)
-* Pandas & NumPy (data processing)
-* scikit-learn (ML regression + classification models)
-* Requests (OpenAQ API integration)
-
-### **Machine Learning**
-
-* Trained **Random Forest Regression** and **Random Forest Classification** models.
-* Trained/tested in **Google Colab** on CSV datasets.
-* Feature engineering with pollutants like **SO₂, NO₂, PM10, PM2.5**.
-
-### **Frontend (UI)**
-
-* Vite + React 
-* TypeScript
-* Tailwind CSS 
-* Axios (API calls to backend)
-
-### **Deployment**
-
-* Backend: **Render / Docker-ready**
-* Model storage: **Git LFS** for large `.joblib` files
-* Frontend: **Vercel / Netlify** (easy deployment)
+This system provides automated intelligence for two key sectors:
+1. **Public Health Early Warnings**: Calculates CPCB standard air quality categories (Good, Moderate, Poor, Unhealthy, Very Unhealthy, Hazardous) with actionable respiratory advisories for sensitive cohorts and schools.
+2. **Smart-Building HVAC Damper Control**: Commercial buildings intake ambient air continuously. During high-pollution events (AQI > 200), the system outputs automated damper throttling directives (reducing intake to 10-30% and maximizing recirculating HEPA filtration), shielding occupants and reducing equipment strain.
+3. **Resilient Dual Ingestion**: Connects to the global OpenAQ v2 telemetry network with automatic fallback to verified CPCB municipal station benchmarks during external API rate limiting.
 
 ---
 
-## Project Structure
+## CPCB Air Quality Index Scale
 
+| AQI Band | CPCB Category | Associated Health Impacts | HVAC Automation Directive |
+|:---|:---|:---|:---|
+| **0 - 50** | **Good** | Minimal impact | 100% fresh air intake, nominal filtration |
+| **51 - 100** | **Moderate** | Minor breathing discomfort to sensitive individuals | Standard intake, MERV-13 pre-filters |
+| **101 - 200** | **Poor** | Discomfort to people with asthma and heart disease | 60% intake, 40% recirculation |
+| **201 - 300** | **Unhealthy** | Noticeable discomfort to general public on prolonged exposure | 30% intake, 70% recirculation, active HEPA |
+| **301 - 400** | **Very Unhealthy** | Respiratory illness on prolonged exposure | 10% intake, 90% recirculation, maximum HEPA |
+| **401 - 500+** | **Hazardous** | Severe respiratory effects across population | Full emergency isolation, 100% recirculation |
+
+---
+
+## API Endpoints
+
+### 1. Health Verification
+```http
+GET /health
 ```
-Indian-Air-Quality-Prediction/
- backend/
-    main.py                # FastAPI app
-    quick_test.py          # Local test script
-    feature_engineering.py # Data transformation
-    requirements.txt       # Backend dependencies
-    model/
-       model_rf.joblib    # Regression model
-       model_clf_rf.joblib# Classification model
-       metadata.json      # Model metadata
- frontend/
-    src/                   # React + Tailwind code
-    package.json
-    vite.config.ts
- data.csv (raw dataset - ignored in repo)
- README.md
-```
-
----
-
-## How It Works
-
-1. **Data Preprocessing**
-
-   * Dataset cleaned & transformed into features: `si (SO₂ index), ni (NO₂ index), rpi (PM index)`
-
-2. **Model Training**
-
-   * Trained & optimized classification + regression models using Colab.
-   * Saved models as `.joblib` files.
-
-3. **Backend (FastAPI)**
-
-   * `/predict` → Accepts pollutant values, returns AQI prediction + advisory.
-   * `/predict_by_openaq` → Fetches live data from OpenAQ API.
-   * `/meta` → Returns feature metadata.
-
-4. **Frontend (React + Tailwind)**
-
-   * Simple UI with input fields for pollutants.
-   * Calls backend API → displays predicted AQI and health advisory.
-
----
-
-## Features
-
- Predict AQI using ML models
- Dual outputs: **Regression AQI value** & **Classification label**
- Health advisory messages for users
- Live OpenAQ API integration (city-based predictions)
- Ready for **Docker & Render deployment**
-
----
-
-## Getting Started
-
-### Clone the repo
-
-```bash
-git clone https://github.com/MuhammadMinhaj229/Indian-Air-Quality-Prediction.git
-cd Indian-Air-Quality-Prediction
-```
-
-### Backend Setup
-
-```bash
-cd backend
-python -m venv .venv
-.venv\Scripts\activate    # Windows
-pip install -r requirements.txt
-uvicorn main:app --reload --host 0.0.0.0 --port 8080
-```
-
-API available at:  [http://localhost:8080/docs](http://localhost:8080/docs)
-
-### Frontend Setup
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-UI available at:  [(http://127.0.0.1:3000/frontend/index.html)]
-
----
-
-## Example Prediction
-
-Request:
-
+Response:
 ```json
+{
+  "status": "healthy",
+  "service": "indian-air-quality-prediction",
+  "models_loaded": true,
+  "features": ["si", "ni", "rpi"]
+}
+```
+
+### 2. Manual Sensor Parameter Inference
+```http
 POST /predict
+Content-Type: application/json
+
 {
   "features": {
-    "si": 12.5,
-    "ni": 34.2,
-    "rpi": 56.8
+    "si": 45.0,
+    "ni": 32.0,
+    "rpi": 95.0
   }
 }
 ```
 
-Response:
+### 3. OpenAQ Live Ingestion with CAAQMS Fallback
+```http
+GET /predict_by_openaq?city=Delhi&country=IN&lookback_hours=6
+```
 
-```json
-{
-  "aqi_regression": 78.42,
-  "aqi_reg_category": "Moderate",
-  "aqi_classification_label": "Moderate",
-  "advisory": "Sensitive individuals should limit prolonged outdoor exertion."
-}
+### 4. Active Metropolitan Stations
+```http
+GET /api/v1/stations
 ```
 
 ---
 
-## Project Screenshots  
+## Local Setup & Development
 
-### Dashboard View  
-<img src="./screenshots/Screenshot%202025-09-11%20184652.png" alt="Dashboard" width="600"/>  
+### 1. Backend Service
+```bash
+cd backend
+pip install -r requirements.txt
+python -m pytest test_backend.py
+uvicorn main:app --host 0.0.0.0 --port 8080 --reload
+```
 
-### Prediction Form  
-<img src="./screenshots/Screenshot%202025-09-11%20184733.png" alt="Prediction Form" width="600"/>  
-
-### Mobile View (Samsung Galaxy A51/71)  
-<img src="./screenshots/127.0.0.1_3000_aqi-alerts_frontend_index.html(Samsung%20Galaxy%20A51_71).png" alt="Mobile View" width="300"/>  
-
-
-
-## Future Work
-
-* Improve accuracy using **deep learning models**.
-* Extend to **state & district level forecasting**.
-* Integrate with **IoT sensors for real-time AQI monitoring**.
-* Build a **progressive web app (PWA)** for mobile users.
-
----
-
-## Author
-
-**Muhammad Minhaj**
-
-*  B.Tech CSE (Data Science)
-*  Passionate about ML, AI, and impactful projects
-*  [GitHub](https://github.com/MuhammadMinhaj229)
+### 2. Frontend Web Console
+Open `frontend/index.html` in any modern web browser or serve via:
+```bash
+npx serve frontend
+```
