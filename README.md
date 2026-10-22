@@ -1,5 +1,9 @@
 # Indian Air Quality Prediction
 
+[![Live Deployment](https://img.shields.io/badge/Live_Deployment-Vercel-success?style=flat-square&logo=vercel)](https://indian-air-quality-prediction.vercel.app)
+
+**Live Deployment:** [https://indian-air-quality-prediction.vercel.app](https://indian-air-quality-prediction.vercel.app)
+
  A machine learning powered system to **predict Air Quality Index (AQI)** across Indian cities, using real-time data pipelines and historical datasets. This project integrates **data preprocessing, feature engineering, regression/classification models, and a FastAPI backend**, with a simple **frontend UI** for user interaction.
 
 ---
