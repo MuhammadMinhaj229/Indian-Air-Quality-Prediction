@@ -1,10 +1,10 @@
-# 🌍 Indian Air Quality Prediction
+# Indian Air Quality Prediction
 
-🚀 A machine learning powered system to **predict Air Quality Index (AQI)** across Indian cities, using real-time data pipelines and historical datasets. This project integrates **data preprocessing, feature engineering, regression/classification models, and a FastAPI backend**, with a simple **frontend UI** for user interaction.
+ A machine learning powered system to **predict Air Quality Index (AQI)** across Indian cities, using real-time data pipelines and historical datasets. This project integrates **data preprocessing, feature engineering, regression/classification models, and a FastAPI backend**, with a simple **frontend UI** for user interaction.
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 Air pollution is one of the biggest environmental concerns in India. This project aims to:
 
@@ -15,12 +15,12 @@ Air pollution is one of the biggest environmental concerns in India. This projec
 
 ---
 
-## 🛠️ Tech Stack
+## ️ Tech Stack
 
 ### **Backend (FastAPI)**
 
 * Python 3.10+
-* FastAPI 🚀 (REST API framework)
+* FastAPI  (REST API framework)
 * Uvicorn (ASGI server)
 * Joblib (model persistence)
 * Pandas & NumPy (data processing)
@@ -35,9 +35,9 @@ Air pollution is one of the biggest environmental concerns in India. This projec
 
 ### **Frontend (UI)**
 
-* Vite + React ⚛️
+* Vite + React 
 * TypeScript
-* Tailwind CSS 🎨
+* Tailwind CSS 
 * Axios (API calls to backend)
 
 ### **Deployment**
@@ -48,7 +48,7 @@ Air pollution is one of the biggest environmental concerns in India. This projec
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 Indian-Air-Quality-Prediction/
@@ -95,7 +95,7 @@ Indian-Air-Quality-Prediction/
 
 ---
 
-## 🔮 Features
+## Features
 
 ✅ Predict AQI using ML models
 ✅ Dual outputs: **Regression AQI value** & **Classification label**
@@ -105,7 +105,7 @@ Indian-Air-Quality-Prediction/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Clone the repo
 
@@ -124,7 +124,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload --host 0.0.0.0 --port 8080
 ```
 
-API available at: 👉 [http://localhost:8080/docs](http://localhost:8080/docs)
+API available at:  [http://localhost:8080/docs](http://localhost:8080/docs)
 
 ### Frontend Setup
 
@@ -134,11 +134,11 @@ npm install
 npm run dev
 ```
 
-UI available at: 👉 [(http://127.0.0.1:3000/frontend/index.html)]
+UI available at:  [(http://127.0.0.1:3000/frontend/index.html)]
 
 ---
 
-## 📊 Example Prediction
+## Example Prediction
 
 Request:
 
@@ -166,20 +166,20 @@ Response:
 
 ---
 
-## 📸 Project Screenshots  
+## Project Screenshots  
 
-### 🔹 Dashboard View  
+### Dashboard View  
 <img src="./screenshots/Screenshot%202025-09-11%20184652.png" alt="Dashboard" width="600"/>  
 
-### 🔹 Prediction Form  
+### Prediction Form  
 <img src="./screenshots/Screenshot%202025-09-11%20184733.png" alt="Prediction Form" width="600"/>  
 
-### 🔹 Mobile View (Samsung Galaxy A51/71)  
+### Mobile View (Samsung Galaxy A51/71)  
 <img src="./screenshots/127.0.0.1_3000_aqi-alerts_frontend_index.html(Samsung%20Galaxy%20A51_71).png" alt="Mobile View" width="300"/>  
 
 
 
-## 🎯 Future Work
+## Future Work
 
 * Improve accuracy using **deep learning models**.
 * Extend to **state & district level forecasting**.
@@ -188,10 +188,10 @@ Response:
 
 ---
 
-## 👨‍💻 Author
+## ‍ Author
 
 **Muhammad Minhaj**
 
-* 🎓 B.Tech CSE (Data Science)
-* 🌱 Passionate about ML, AI, and impactful projects
-* 🔗 [GitHub](https://github.com/MuhammadMinhaj229)
+*  B.Tech CSE (Data Science)
+*  Passionate about ML, AI, and impactful projects
+*  [GitHub](https://github.com/MuhammadMinhaj229)
